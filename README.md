@@ -18,7 +18,7 @@ CREATE TABLE `db02`.`board` (
 `date` DATETIME NULL ,
 PRIMARY KEY (`boardNo`));
 
-CREATE TABLE `db02`.`comments` (
+CREATE TABLE `db02`.`comment` (
 `commentNo` INT NOT NULL AUTO_INCREMENT,
 `boardNo` INT NOT NULL,
 `userNo` INT NOT NULL,
