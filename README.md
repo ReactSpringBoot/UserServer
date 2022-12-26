@@ -1,5 +1,3 @@
-# SpringBoot
-
 # db 생성
 
 create database dbo2;
