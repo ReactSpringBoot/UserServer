@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="Mapper">
+	<select id="login" parameterType="String" resultType="Pack.dto.UserDTO">
+		select * from user where id = #{id}
+	</select>
+	
+	<insert id="signUp" parameterType="Pack.dto.UserDTO">
+		insert into user value(null, #{name}, #{id}, #{pw})
+	</insert>
+	
+	<select id="boardList" resultType="Pack.dto.BoardDTO">
+		select boardNo, name, id, title, contents, date, user.userNO 
+		from board 
+		join user on board.userNo = user.userNo;
+	</select>
+	
+	<insert id="newBoard" parameterType="Pack.dto.BoardDTO">
+		insert into board values(null, #{userNo}, #{title}, #{contents}, now())
+	</insert>
+	
+	<select id="boardDetail" resultType="int">
+		select name, id, title, contents, date 
+		from board 
+		join user on board.userNo = user.userNo where boardNo = #{boardNo}
+	</select>
+	
+	<delete id="boardDelete" parameterType="int">
+		delete from board where boardNo = #{boardNo}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="Pack.dto.BoardDTO">
+		update board set title=#{title}, contents=#{contents} where boardNo=#{boardNo}
+	</update>
+</mapper>
