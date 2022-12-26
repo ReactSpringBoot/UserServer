@@ -12,8 +12,16 @@ UNIQUE INDEX (id));
   
 CREATE TABLE `db02`.`board` (
 `boardNo` INT NOT NULL AUTO_INCREMENT,
-`userNo` VARCHAR(45) NOT NULL,
+`userNo` INT NOT NULL,
 `title` VARCHAR(45) NULL,
 `contents` VARCHAR(255) NULL,
 `date` DATETIME NULL ,
 PRIMARY KEY (`boardNo`));
+
+CREATE TABLE `db02`.`comments` (
+`commentNo` INT NOT NULL AUTO_INCREMENT,
+`boardNo` INT NOT NULL,
+`userNo` INT NOT NULL,
+`comment` VARCHAR(45) NULL,
+`date` DATETIME NULL,
+PRIMARY KEY (`commentNo`));
