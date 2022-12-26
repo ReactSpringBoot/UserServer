@@ -1,6 +1,6 @@
 # db 생성
 
-create database dbo2;
+create database db02;
 
 CREATE TABLE `db02`.`user` (
 `userNo` INT NOT NULL AUTO_INCREMENT,
