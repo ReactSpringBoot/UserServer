@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import Pack.dao.util.Delegate;
 import Pack.dao.util.JdbcTemplate;
 import Pack.dto.BoardDTO;
+import Pack.dto.CommentDTO;
 
 
 @Repository
@@ -37,18 +38,6 @@ public class BoardDao {
 		});
 	}
 	
-	public BoardDTO boardDetail(int boardNo) {
-		BoardDTO board = (BoardDTO)JdbcTemplate.getInstance().proxy(new Delegate() {
-			
-			@Override
-			public Object delegate(SqlSession session) {
-				return session.selectOne("boardList", boardNo);
-			}
-		});
-		
-		return board;
-	}
-	
 	public void boardDelete(int boardNo) {
 		JdbcTemplate.getInstance().proxy(new Delegate() {
 			
@@ -65,6 +54,39 @@ public class BoardDao {
 			@Override
 			public Object delegate(SqlSession session) {
 				return session.insert("boardUpdate", dto);
+			}
+		});
+	}
+	
+	public void newComment(CommentDTO dto) {
+		JdbcTemplate.getInstance().proxy(new Delegate() {
+			
+			@Override
+			public Object delegate(SqlSession session) {
+				return session.insert("newComment", dto);
+			}
+		});
+	}
+	
+	public List<CommentDTO> commentList(int boardNo) {
+		@SuppressWarnings("unchecked")
+		List<CommentDTO> list = (List<CommentDTO>)JdbcTemplate.getInstance().proxy(new Delegate() {
+			
+			@Override
+			public Object delegate(SqlSession session) {
+				return session.selectList("commentList", boardNo);
+			}
+		});
+		
+		return list;
+	}
+	
+	public void commentDelete(int commentNo) {
+JdbcTemplate.getInstance().proxy(new Delegate() {
+			
+			@Override
+			public Object delegate(SqlSession session) {
+				return session.delete("commentDelete", commentNo);
 			}
 		});
 	}

@@ -49,7 +49,7 @@ public class JdbcTemplate {
 			}
 		} catch (Exception e) {
 			System.out.println("요기");
-//			e.printStackTrace(); 
+			e.printStackTrace(); 
 		} 
 		finally { session.close(); }
 		

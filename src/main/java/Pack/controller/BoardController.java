@@ -1,7 +1,5 @@
 package Pack.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Pack.dto.BoardDTO;
+import Pack.dto.CommentDTO;
 import Pack.service.BoardService;
 
 @RestController
@@ -19,30 +18,39 @@ public class BoardController {
 	
 	@GetMapping("/boardList")
 	public Object boardList() {
-		List<BoardDTO> list = service.boardList();
-		return list;
+		return service.boardList();
 	}
 	
 	@PostMapping("newBoard")
-	public String newBoardPost(@RequestBody BoardDTO dto) {
-		System.out.println(dto.getTitle());
-		System.out.println(dto.getUserNo());
-		System.out.println(dto.getContents());
+	public void newBoard(@RequestBody BoardDTO dto) {
 		service.newBoard(dto);
-		return "aa";
 	}
+	
 	@PostMapping("deleteBoard/{boardNo}")
-	public String deleteBoard(@PathVariable int boardNo) {
-		System.out.println(boardNo);
+	public void deleteBoard(@PathVariable int boardNo) {
 		service.boardDelete(boardNo);
-		return "aa";
 	}
 	
 	@PostMapping("updateBoard")
-	public String updateBoardPost(@RequestBody BoardDTO dto) {
-		service.boardUpdate(dto);
-		return "aa";
+	public void updateBoardPost(@RequestBody BoardDTO dto) {
+		service.boardUpdate(dto);		
 	}
 	
+	@PostMapping("newComment")
+	public void newComment(@RequestBody CommentDTO dto) {
+		service.newComment(dto);
+	}
+	
+	@GetMapping("commentList/{boardNo}")
+	public Object commentList(@PathVariable int boardNo) {
+		System.out.println("test" + boardNo);
+		return service.commentList(boardNo);
+	}
+	
+	@PostMapping("commentDelete/{commentNo}")
+	public void commentDelete(@PathVariable int commentNo) {
+		System.out.println("제발 되라 "+commentNo);
+		service.commentDelete(commentNo);
+	}
 	
 }
