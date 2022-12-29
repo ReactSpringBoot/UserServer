@@ -22,6 +22,10 @@ public class BoardService {
 		dao.newBoard(dto);
 	}
 	
+	public BoardDTO boardDetail(int boardNo) {
+		return dao.boardDetail(boardNo);
+	}
+	
 	public void boardUpdate(BoardDTO dto) {
 		dao.boardUpdate(dto);
 	}

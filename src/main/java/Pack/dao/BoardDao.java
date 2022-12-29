@@ -38,6 +38,18 @@ public class BoardDao {
 		});
 	}
 	
+	public BoardDTO boardDetail(int boardNo) {
+		BoardDTO board = (BoardDTO)JdbcTemplate.getInstance().proxy(new Delegate() {
+			
+			@Override
+			public Object delegate(SqlSession session) {
+				return session.selectOne("boardDetail", boardNo);
+			}
+		});
+		
+		return board;
+	}
+	
 	public void boardDelete(int boardNo) {
 		JdbcTemplate.getInstance().proxy(new Delegate() {
 			
