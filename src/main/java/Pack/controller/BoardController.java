@@ -13,7 +13,7 @@ import Pack.dto.CommentDTO;
 import Pack.service.BoardService;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardController {
 	@Autowired
 	BoardService service;

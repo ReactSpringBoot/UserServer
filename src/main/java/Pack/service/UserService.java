@@ -21,6 +21,8 @@ public class UserService {
 		UserDTO user = dao.login(dto);
 		
 		if ((user == null) || !(dto.getPw().equals(user.getPw()))) return null;
+		
+		user.setPw(null);
 			
 		request.getSession().setAttribute("id", user.getId());
 		request.getSession().setAttribute("name", user.getName());

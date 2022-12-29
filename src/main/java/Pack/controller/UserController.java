@@ -13,7 +13,7 @@ import Pack.dto.UserDTO;
 import Pack.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	@Autowired
 	UserService service;
