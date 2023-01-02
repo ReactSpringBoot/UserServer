@@ -14,7 +14,7 @@ CREATE TABLE `db02`.`board` (
 `boardNo` INT NOT NULL AUTO_INCREMENT,
 `userNo` INT NOT NULL,
 `title` VARCHAR(45) NULL,
-`contents` VARCHAR(255) NULL,
+`contents` VARCHAR(1024) NULL,
 `date` DATETIME NULL ,
 PRIMARY KEY (`boardNo`));
 
