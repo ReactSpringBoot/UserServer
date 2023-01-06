@@ -2,6 +2,7 @@ package Pack.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,21 @@ public class UserService {
 	@Autowired
 	UserDao dao;
 	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+	
 	public boolean signUp(UserDTO dto) {
-		return dao.signUp(dto);
+		boolean result = dao.signUp(dto);
+		
+		if (result) {
+			rabbitTemplate.convertAndSend(
+					"signUp",		
+					"signUpKey",		
+					dto				
+			);
+		}
+		
+		return result;
 	}
 	
 	public UserDTO login(UserDTO dto, HttpServletRequest request) {
